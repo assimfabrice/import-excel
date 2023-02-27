@@ -69,9 +69,11 @@ class ImportDatas
                             $datas->setNumeroDeFiche(intval($value[3]));
                         else $datas->setNumeroDeFiche(intval(0));
                         if($value[4] != '')
-                            $datas->setLibelleCivilite($value[4]);
+                            $datas->setLibelleCivilite($value[4]); 
+                        else $datas->setLibelleCivilite(''); 
                         if($value[5] != '')
                             $datas->setProprieteActuelDuVehicule($value[5]);
+                        else $datas->setProprieteActuelDuVehicule('');
                         if($value[6] != '' && is_string($value[6]))
                             $datas->setNom($value[6]);
                         else $datas->setNom('');
@@ -134,22 +136,25 @@ class ImportDatas
                         else $datas->setKilometrage(0);
                         if( $value[26] != '' && is_string($value[26]))
                             $datas->setLibelleEnergie($value[26]);
-                        else $datas->setLibelleEnergie('');
+                        else $datas->setLibelleEnergie('');                        
                         if( $value[27] != '')
-                            $datas->setLibelleCivilite($value[27]);
-                        if( $value[28] != '')
-                            $datas->setVendeurVN($value[28]);
+                            $datas->setVendeurVN($value[27]);                            
+                        else $datas->setVendeurVN('');     
+                        if( $value[28] != '')                            
+                            $datas->setVendeurVO($value[28]);                            
+                        else $datas->setVendeurVO('');                            
                         if( $value[29] != '')                            
-                            $datas->setVendeurVO($value[29]);
-                        if( $value[30] != '')                            
-                            $datas->setCommentaireDeFacturation($value[30]);
+                            $datas->setCommentaireDeFacturation($value[29]);
+                        else $datas->setCommentaireDeFacturation('');
+                        if( $value[30] != '')
+                            $datas->setTypeVNVO($value[30]); 
+                        else $datas->setTypeVNVO(''); 
                         if( $value[31] != '')
-                            $datas->setTypeVNVO($value[31]);
-                        if( $value[32] != '' && is_int($value[32]))
-                            $datas->setNumeroDeDossierVN($value[32]);
-                        else $datas->setNumeroDeDossierVN(0);
-                        if( $value[33] != '')
-                            $datas->setIntermediaireDeVente($value[33]);
+                            $datas->setNumeroDeDossierVN($value[31]); 
+                        else $datas->setNumeroDeDossierVN('');                        
+                        if( $value[32] != '')
+                            $datas->setIntermediaireDeVente($value[32]);
+                        else $datas->setIntermediaireDeVente('');
                         if( $value[33] != '') 
                             $datas->setDateEvenement(new DateTime($value[33]));
                         else $datas->setDateEvenement(new DateTime('now'));
