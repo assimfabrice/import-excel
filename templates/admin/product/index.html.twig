@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des produits{% endblock %}
+{% set runtimeConfig = {"thumbnail": {"size": [50, 50] }} %}
+
+
+{% block body %}
+<table>
+    <th>Id</th>
+    <th>Nom</th>
+    <th>Description</th>
+    <th>Prix</th>   
+    <th>Image du produit</th>
+    <th>Date de création</th>
+    <th>Date de mise à jour</th>
+    <th>Action</th>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>               
+                <td>{{ product.price }}</td>                                
+                <td>
+                    {% if product.image %}
+                        <img src="{{ vich_uploader_asset(product, 'imageFile') }}" style="width:100%; height:auto;"/>
+                    {% endif %}
+                </td>
+                <td>{{ product.createdAt|date('d-m-Y') }}</td>
+                <td>{{ product.updatedAt|date('d-m-Y') }}</td>                
+                <td><a href="{{ path('app_admin_product_edit', {id: product.id }) }}">Modifier</a></td>
+                <td>
+                    <form method="POST" action="{{path('app_admin_product_delete', {id: product.id})}}" onsubmit="return confirm('Voulez-vous craiment supprimer ce produit?')">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}" />
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <button>Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="section actions">
+    <a href="{{ path('app_admin_product_new') }}" class="btn btn-lg btn-block btn-success">
+        <i class="fa fa-plus" aria-hidden="true"></i> Ajouter un produit
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% if app.user %}
+    <div class="mb-3"> 
+        Vous êtes connecté(e) comme  {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        <a href="{{ path('app_admin_product_index') }}">Administration des produits</a>
+        <a href="{{ path('app_admin_index') }}">Administration des utilisateurs</a>
+    </div>
+{% endif %}

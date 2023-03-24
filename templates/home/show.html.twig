@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail produit{% endblock %}
+
+{% block body %}
+    
+    <h1>Produit</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom du produit</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ product.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>
+                    {% if product.image %}
+                        <img src="{{ vich_uploader_asset(product, 'imageFile') }}" style="width:100%; height:auto;"/>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>          
+                <a href="{{ path('cart_add', {id: product.id})}}">Ajouter au panier</a>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_front') }}">Liste des produits</a>
+    
+{% endblock %}

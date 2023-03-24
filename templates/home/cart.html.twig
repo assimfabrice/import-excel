@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %}Panier{% endblock %}
+{% block body %}
+Contenu du panier
+{% if items | length > 0 %}
+<table >
+    <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.product.price * item.quantity }}</td>
+                <td>{{ item.product.description }}</td>
+                <td>
+                    <a href="{{ path('cart_remove', {'id': item.product.id } ) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            Montant total du panier: {{total}}
+        </tr>
+    </tfoot>
+</table>
+{% else %}
+<p>Panier vide</p>
+{% endif %}
+<a href="{{ path('app_front') }}">Liste des produits</a>
+<a href="{{ path('app_empty') }}">Vider le panier</a>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des utilisateurs!{% endblock %}
+
+{% block body %}
+    <h1> Liste des utilisateurs </h1>   
+    <table>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Préom</th>
+        <th>Email</th>
+        <th>Mot de passe</th>
+        <th>Roles</th>
+        <th>Date de création</th>
+        <th>Date de mise à jour</th>
+        <th>Action</th>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.firstName }}</td>               
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.password }}</td>
+                    <td>
+                        {% for role in user.roles %}
+                           {{ role }}
+                        {% endfor %}
+                    </td>
+                    <td>{{ user.createdAt|date('d-m-Y') }}</td>
+                    <td>{{ user.updatedAt|date('d-m-Y') }}</td>
+                    <td>{{ user.id }}</td>
+                    <td><a href="{{ path('app_admin_edit', {id: user.id }) }}">Modifier</a></td>
+                    <td>
+                        <form method="POST" action="{{path('app_admin_delete', {id: user.id})}}" onsubmit="return confirm('Voulez-vous craiment supprimer ce produit?')">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}" />
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button>Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit liste{% endblock %}
+
+{% block body %}
+      <div class="jumbotron">
+        <div class="container">
+            {{ form_start(form )}}
+                <input type="submit"
+            {{ form_end(form )}}
+        </div>
+      </div>
+      {% for product in products %}
+        {{ product.id}}
+        {{ product.name}}
+         <a href="{{ path('app_front_show', {id: product.id, name: product.name})}}">Voir la fiche</a>
+         {{ product.price}}
+         {{ product.description}}
+      {% else %}
+      Aucun produit
+      {% endfor %}         
+      <div class="navigation">
+        {{ knp_pagination_render(products) }}
+      </div>
+      
+{% endblock %}
